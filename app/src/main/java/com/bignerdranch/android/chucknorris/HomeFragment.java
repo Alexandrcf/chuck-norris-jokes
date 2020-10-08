@@ -1,5 +1,7 @@
 package com.bignerdranch.android.chucknorris;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -23,7 +25,6 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-
     private RecyclerView jokeList;
     private JokesAdapter jokesAdapter;
     private Button btnReload;
@@ -39,20 +40,37 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         jokeList = getActivity().findViewById(R.id.rv_numbers);
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         jokeList.setLayoutManager(layoutManager);
-
         etCount = (EditText) getActivity().findViewById(R.id.et_count);
-
         btnReload = (Button) getActivity().findViewById(R.id.btn_reload);
         btnReload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                httpCall(Integer.parseInt(etCount.getText().toString()));
+                String countValue = etCount.getText().toString();
+                if(countValue != null && !countValue.isEmpty() && !countValue.equals("") && Integer.parseInt(countValue) > 0) {
+                    httpCall(Integer.parseInt(countValue));
+                }
+                else {
+                    showAlert();
+                }
             }
         });
+    }
 
+    public void showAlert() {
+        int message;
+        message = R.string.incorrect_input;
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+        dialog.setTitle(R.string.attention)
+                .setMessage(message)
+                .setPositiveButton(R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+        dialog.show();
     }
 
     @Override
@@ -92,7 +110,6 @@ public class HomeFragment extends Fragment {
     public void httpCall(Integer jokesCount) {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         String url ="http://api.icndb.com/jokes/random/" + jokesCount.toString();
-        // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -102,17 +119,12 @@ public class HomeFragment extends Fragment {
                         jokesAdapter = new JokesAdapter(jokes.value);
                         jokeList.setAdapter(jokesAdapter);
                         _jokes = jokes.value;
-
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
             }
         });
-        // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
 }
-
-

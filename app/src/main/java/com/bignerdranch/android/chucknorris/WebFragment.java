@@ -23,12 +23,10 @@ public class WebFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
         webView = (WebView) getActivity().findViewById(R.id.webView);
         webView.setWebViewClient(new WebViewClient());
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-
         if(webViewState==null){
             webView.loadUrl("http://www.icndb.com/api/");
         }else{
@@ -44,8 +42,6 @@ public class WebFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.fragment_web, container, false);
     }
-
 }

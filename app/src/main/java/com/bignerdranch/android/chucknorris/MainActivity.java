@@ -17,9 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         et_count = (EditText) findViewById(R.id.et_count);
-
         BottomNavigationView bottomNavigationView =  findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
@@ -44,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
                     selectedFragment = new WebFragment();
                     break;
             }
-
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
             return true;
         }

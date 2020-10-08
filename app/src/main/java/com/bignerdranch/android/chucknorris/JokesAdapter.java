@@ -21,13 +21,9 @@ public class JokesAdapter extends RecyclerView.Adapter<JokesAdapter.JokesViewHol
     public JokesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         int layoutIdForListItem = R.layout.number_list_item;
-
         LayoutInflater inflater = LayoutInflater.from(context);
-
         View view = inflater.inflate(layoutIdForListItem, parent, false);
-
         JokesViewHolder viewHolder = new JokesViewHolder(view);
-
         return viewHolder;
     }
 
@@ -48,7 +44,6 @@ public class JokesAdapter extends RecyclerView.Adapter<JokesAdapter.JokesViewHol
 
         public JokesViewHolder(View itemView) {
             super(itemView);
-
             listItemNumberView = itemView.findViewById(R.id.tv_number_item);
 
         }
