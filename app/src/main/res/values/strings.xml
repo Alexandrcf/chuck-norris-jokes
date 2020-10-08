@@ -5,7 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="jokes">jokes</string>
     <string name="web">web</string>
-    <string name="incorrect_input">Incorrect input! Enter a number greater than 0</string>
+    <string name="incorrect_input">Incorrect input! Please enter valid value greater then zero </string>
     <string name="attention">Attention</string>
     <string name="ok">Ok</string>
 </resources>
